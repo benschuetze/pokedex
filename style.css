@@ -1,0 +1,366 @@
+html {
+    scroll-behavior: smooth;
+    background-color: #21d190;
+    background-image: linear-gradient(315deg, #21d190 0%, #d65bca 74%);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #21d190;
+    background-image: linear-gradient(315deg, #21d190 0%, #d65bca 74%);
+}
+
+button, input, select, textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+td {
+    min-width: fit-content;
+    width: 9em;
+    font-size: 0.8rem;
+    padding-bottom: 1em;
+}
+
+span {
+    white-space: nowrap;
+}
+
+p {
+    white-space: nowrap;
+}
+
+h1 {
+    width: 100%;
+    text-align: center;
+    color: white;
+    letter-spacing: 7px;
+    font-size: 5rem;
+    margin-bottom: 2rem;
+}
+
+span::first-letter {
+    text-transform: capitalize;
+} 
+
+::-webkit-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+:-moz-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+::-moz-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+:-ms-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+:-moz-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+::-moz-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+:-ms-input-placeholder {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*helper classes*/
+
+.d-none {
+    display: none !important;
+}
+
+.scale-0 {
+    transform: scale(0);
+}
+
+.z-index-negative {
+    z-index: -100;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.opacity {
+    opacity: 0.7;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+  }
+
+.width-100 {
+    width: 100%;
+}
+
+.bg-fire {
+    background-color:#FB6C6C;
+}
+
+.bg-fire:hover {
+    background-color:#fb5b5b;
+}
+
+.bg-water {
+    background-color: #6890F0;
+}
+
+.bg-water:hover {
+    background-color:#5382ee; 
+}
+
+.bg-grass {
+    background-color: #9BCC50;
+}
+
+.bg-grass:hover {
+    background-color: #8ec639;
+}
+
+.bg-bug {
+    background-color: #A8B820;
+}
+
+.bg-bug:hover {
+    background-color: #93a01c;
+}
+
+.bg-normal {
+    background-color:#A8A878;
+}
+
+.bg-normal:hover {
+    background-color: #92925d;
+}
+
+/*ids*/
+
+#pokedex {
+    min-height: 50vh;
+    width: 100%;
+    background-color: #3bb78f;
+    background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
+    color: white;
+    z-index: 0;
+}
+
+#name-container {
+    max-height: 50vh;
+}
+
+#stats-nav {
+    padding-bottom: 1em;
+}
+
+#all-pokemon {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #21d190;
+    background-image: linear-gradient(315deg, #21d190 0%, #d65bca 74%);
+}
+
+/*classes*/
+
+.card-small {
+    min-height: 40vh;
+    min-width: 10px;
+    max-width: 100%;
+    color: white;
+    z-index: 0;
+    margin: 0.3em;
+    padding: 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: position 500ms ease-in-out;
+    padding-bottom: 1.4em;
+}
+
+.card-small:hover {
+    transition: transform 200ms;
+    z-index: 999;
+    transition-timing-function: cubic-bezier(.17,1.9,.92,.6);
+    transition-delay: .5s;
+    transform: scale(1.074);  
+}
+
+.pokemon-name {
+    position: absolute;
+    top: 0;
+    font-size: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'League Gothic', sans-serif;
+    letter-spacing: 2px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.pokemon-image {
+    max-width: 100px;
+    min-width: 230px;
+    height: auto;
+    max-height: 30vh;
+    object-fit: contain;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.img-container {
+    min-height: 82%;
+    display: flex;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.type-ability {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.type {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: fit-content;
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    outline: 1.7px solid rgb(220,220,220);
+    border-radius: 7px;
+}
+
+.ability {
+    font-family: 'League Gothic', sans-serif;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+    color: black;
+    opacity: 0.7;
+}
+
+.pokemon {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+}
+
+.bg-zoom {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+}
+
+.zoom-in {
+    transition: position 500ms ease-in-out;
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    right: 5%;
+    bottom: 10%;
+    z-index: 2000 !important;
+}
+
+.zoom-in:hover {
+    transition: none !important;
+    transform: none;  
+}
+
+.stats-container {
+    width: 60px;
+    display: flex;
+    margin-left: 0 auto;
+} 
+
+/*stats-bar*/
+
+.wrapper {
+    width: 80px;
+    transform: rotate(180deg);
+    margin-right: 3px;
+    margin-left: 3px;
+}
+
+.stats-bar {
+    max-width: 80px;
+    min-width: 60px;
+    height: 100px;
+    background-color: rgb(0,0,0,0.5);
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.stats-bar-fill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80px;
+    min-width: 60px;
+    background-color: #42378f;
+    background-image: linear-gradient(315deg, #42378f 0%, #f53844 74%);
+    border-radius: 4px;
+    height: 20%;
+    transition: height 500ms ease-in-out;
+}
+
+.span-in-bar {
+    transform: rotate(180deg);
+    font-size: 1.3rem;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 2px;
+    color: white;
+}
+
+@media(max-width: 580px) {
+    .stats-bar,
+    .stats-bar-fill {
+        width: 60px;
+    }
+
+    .span-in-bar {
+        font-size: 1rem;
+    }
+}
