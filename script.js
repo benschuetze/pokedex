@@ -15,24 +15,35 @@ async function load() {
 }
 
 async function loadAllPokemon() {
-    let url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=20';
+    let url = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=100';
     let response = await fetch(url);
     allPokemon = await response.json();
     renderAllPokemonHTML(allPokemon);
-}   
+    pushToArray(allPokemon);
+}  
 
-async function renderAllPokemonHTML(allPokemon) {
-    for(i = 0; i < 20; i++) {
-        singlePokemonUrl = allPokemon['results'][i]['url'];
+async function pushToArray(allPokemon) {
+    for(i = 0; i < 100; i++) {
+        let singlePokemonUrl = allPokemon['results'][i]['url'];
         let response = await fetch(singlePokemonUrl);
         pokemon = await response.json();
         arrOfAllPokemon.push(pokemon);
+    }
+}
+
+let arrIndex = 0;
+let length = 20;
+
+async function renderAllPokemonHTML(allPokemon) {
+    for(i = arrIndex; i < length; i++) {
+        let singlePokemonUrl = allPokemon['results'][i]['url'];
+        let response = await fetch(singlePokemonUrl);
+        pokemon = await response.json();
         let all = document.getElementById('all-pokemon');
         all.innerHTML = '';
             for(i = 0; i < arrOfAllPokemon.length; i++) {
             let title = capitalize(arrOfAllPokemon[i]['name']);
             let type = capitalize(arrOfAllPokemon[i]['types'][0]['type']['name']);
-            let weight = arrOfAllPokemon[i]['weight'];
             let image = arrOfAllPokemon[i]['sprites']['other']['dream_world']['front_default'];
             let ability = capitalize(arrOfAllPokemon[i]['abilities'][0]['ability']['name']);
             all.innerHTML += pokemonHTML(i, title, type, image, ability);
@@ -42,6 +53,18 @@ async function renderAllPokemonHTML(allPokemon) {
 }
 
 /*functions*/
+
+window.onscroll = function() {
+    let scrollY = window.scrollY;
+    if ((window.innerHeight + scrollY) >= document.body.scrollHeight) {
+        arrIndex = arrIndex + 20;
+        length = length + 19;
+        renderAllPokemonHTML(allPokemon);
+        console.log('pimmel', scrollY);
+        scrollY = window.scrollY - window.innerHeight;
+        console.log('anus', scrollY);
+    }
+};
 
 function showPokemon(i) {
     zoomMode(i);
@@ -114,26 +137,25 @@ function resetStats(i) {
 }
 
 
-function backgroundColor(i, type) {
-    let currentPokemon = document.getElementById(i);
-    if(type == 'Grass') {
-        currentPokemon.classList.add('bg-grass');
-    }
 
-    if(type == 'Fire') {
-        currentPokemon.classList.add('bg-fire');
-    }
+/*search function*/ 
 
-    if(type == 'Water') {
-        currentPokemon.classList.add('bg-water');
-    }
-
-    if(type == 'Bug') {
-        currentPokemon.classList.add('bg-bug');
-    }
-
-    if(type == 'Normal') {
-        currentPokemon.classList.add('bg-normal');
+function filterPokemon() {
+    let search = document.getElementById('search').value;
+    let pokemonContainer = document.getElementById('all-pokemon');
+    search = search.toLowerCase();
+    pokemonContainer.innerHTML = '';
+    console.log(search);
+    for (let i = 0; i < arrOfAllPokemon.length; i++) {
+        let title = arrOfAllPokemon[i]['name'];
+        let poketitle = capitalize(arrOfAllPokemon[i]['name']);
+        let type = capitalize(arrOfAllPokemon[i]['types'][0]['type']['name']);
+        let image = arrOfAllPokemon[i]['sprites']['other']['dream_world']['front_default'];
+        let ability = capitalize(arrOfAllPokemon[i]['abilities'][0]['ability']['name']);
+        if(title.toLowerCase().includes(search)) {
+        pokemonContainer.innerHTML += pokemonHTML(i, poketitle, type, image, ability);
+        backgroundColor(i,type);
+        }
     }
 }
  
@@ -143,9 +165,9 @@ function pokemonHTML(i, title, type, image, ability) {
     let currentPokemon = document.getElementById(i);
     if(!currentPokemon) {
     return /*html*/ `
-    <div class="bg-zoom d-none" id="bg-${i}" onclick="backToAll(${i})">
+    <div loading="lazy" class="bg-zoom d-none" id="bg-${i}" onclick="backToAll(${i})">
     </div>
-        <div id="${i}" class="card-small" onclick="showPokemon(${i})">
+        <div loading="lazy" id="${i}" class="card-small" onclick="showPokemon(${i})">
             <span id="back-${i}" class="d-none">Back To All</span>
             <span class="pokemon-name">${title}</span>
             <div class="img-container">
@@ -184,3 +206,61 @@ function pokemonHTML(i, title, type, image, ability) {
         </div>`;
     }
 }
+
+/*background-colors*/
+
+function backgroundColor(i, type) {
+    let currentPokemon = document.getElementById(i);
+    if(type == 'Grass') {
+        currentPokemon.classList.add('bg-grass');
+    }
+
+    if(type == 'Fire') {
+        currentPokemon.classList.add('bg-fire');
+    }
+
+    if(type == 'Water') {
+        currentPokemon.classList.add('bg-water');
+    }
+
+    if(type == 'Bug') {
+        currentPokemon.classList.add('bg-bug');
+    }
+
+    if(type == 'Normal') {
+        currentPokemon.classList.add('bg-normal');
+    }
+
+    if(type == 'Poison') {
+        currentPokemon.classList.add('bg-poison');
+    }
+
+    if(type == 'Electric') {
+        currentPokemon.classList.add('bg-electric');
+    }
+
+    if(type == 'Ground') {
+        currentPokemon.classList.add('bg-ground');
+    }
+
+    if(type == 'Fairy') {
+        currentPokemon.classList.add('bg-fairy');
+    }
+
+    if(type == 'Fighting') {
+        currentPokemon.classList.add('bg-fighting');
+    }
+
+    if(type == 'Psychic') {
+        currentPokemon.classList.add('bg-psychic');
+    }
+
+    if(type == 'Rock') {
+        currentPokemon.classList.add('bg-rock');
+    }
+
+    if(type == 'Ghost') {
+        currentPokemon.classList.add('bg-ghost');
+    }
+}
+

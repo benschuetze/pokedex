@@ -46,13 +46,32 @@ h1 {
     text-align: center;
     color: white;
     letter-spacing: 7px;
-    font-size: 5rem;
+    font-size: 6em;
     margin-bottom: 2rem;
 }
 
 span::first-letter {
     text-transform: capitalize;
 } 
+
+input[type=text] {
+    border: none;
+    height: 45px;
+    width: 180px;
+    border-radius: 110px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-left: 17px;
+    padding-right: 17px;
+    font-size: 16px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+  }
+
+  input[type=text]:focus {
+      outline: none;
+  }
 
 ::-webkit-input-placeholder {
     font-family: 'Roboto', sans-serif;
@@ -169,6 +188,70 @@ span::first-letter {
     background-color: #92925d;
 }
 
+.bg-poison {
+    background-color:#4be269;
+}
+
+.bg-poison:hover {
+    background-color: #2cdd50;
+}
+
+.bg-electric {
+    background-color: #d2e600;
+}
+
+.bg-electric:hover {
+    background-color: #c9db00;
+}
+
+.bg-ground {
+    background-color: #795925;
+}
+
+.bg-ground:hover {
+    background-color: #694d20;
+}
+
+.bg-fairy {
+    background-color: #cc93c3;
+}
+
+.bg-fairy:hover {
+    background-color: #c686bb;
+}
+
+.bg-fighting {
+    background-color: #b82828;
+}
+
+.bg-fighting:hover {
+    background-color: #a72525;
+}
+
+.bg-psychic {
+    background-color:  #1dcdc7;
+}
+
+.bg-psychic:hover {
+    background-color: #1bc0ba;
+}
+
+.bg-rock {
+    background-color: #a7a595;
+}
+
+.bg-rock:hover {
+    background-color: #9b9987;
+}
+
+.bg-ghost {
+    background-color: #b1aacb;
+}
+
+.bg-ghost:hover {
+    background-color: #a29ac1;
+}
+
 /*ids*/
 
 #pokedex {
@@ -197,6 +280,33 @@ span::first-letter {
 }
 
 /*classes*/
+
+.button {
+    
+    display: flex;
+    outline: 0;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 17px 30px;
+    border: 0;
+    color: #fff;
+    font-size: 17.5px;
+    background: #00d301;
+    background: -webkit-linear-gradient(-196deg,#00d301,#36c275 50%,#00a562);
+    background: -webkit-linear-gradient(164deg,#00d301,#36c275 50%,#00a562);
+    background: linear-gradient(286deg,#00d301,#36c275 50%,#00a562);
+    line-height: 30px;
+    font-weight: 800;
+    height: 45px;
+    transition: background,color .1s ease-in-out;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 3px;
+    font-size: 21px;
+    border-radius: 110px;
+    color: #333d40;
+    margin-bottom: 40px;
+}
 
 .card-small {
     min-height: 40vh;
