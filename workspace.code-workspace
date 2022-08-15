@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "..\\..\\programming\\default_codes"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "pokedex"
+	}
+}

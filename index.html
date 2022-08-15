@@ -3,8 +3,10 @@
 
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Cardo:ital,wght@0,400;0,700;1,400&family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=League+Gothic&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yanone+Kaffeesatz:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bangers&family=Cardo:ital,wght@0,400;0,700;1,400&family=Economica:ital,wght@0,400;0,700;1,400;1,700&family=League+Gothic&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Yanone+Kaffeesatz:wght@300&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,10 +19,13 @@
 <body onload="load()" id="body">
     <h1 style="font-family: 'Bangers', cursive;">POKEDEX</h1>
     <div class="flex-center">
-    <input type="text" id="search" onkeyup="filterPokemon()"><button class="button"><span>Search</span></button>
+        <input id="top-input" class="flex-center" type="text" id="search" onkeyup="filterPokemon()">
+        <button id="top-button" class="button flex-center"><span>Search</span></button>
+        <img title="show favorite pokemon" id="top-heart" style="margin-top: -36px; margin-left: 24px; cursor: pointer;" onclick="showFavorites()" class="icon" src="heart.svg" alt="">
+        <img id="top-heart-full" title="back to all pokemon" class="d-none icon" style="margin-top: -36px; margin-left: 24px; cursor: pointer;" onclick="showAllPokemon()" src="arrow-back.svg" alt="">
     </div>
     <div id="all-pokemon"></div>
-
+    <div id="alert" class="opacity-0"></div>
 </body>
 
 </html>

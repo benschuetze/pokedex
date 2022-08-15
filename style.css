@@ -254,6 +254,23 @@ input[type=text] {
 
 /*ids*/
 
+#alert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    background-color: white;
+    height: 61px;
+    width: 300px;
+    position: fixed;
+    top: 10%;
+    left: 65%;
+    margin: 0 auto;
+    z-index: 3000;
+    border-radius: 8px;
+    transition: all 250ms ease;
+}
+
 #pokedex {
     min-height: 50vh;
     width: 100%;
@@ -281,6 +298,11 @@ input[type=text] {
 
 /*classes*/
 
+.icon:hover {
+    opacity: 0.7;
+}
+
+
 .button {
     
     display: flex;
@@ -306,6 +328,12 @@ input[type=text] {
     border-radius: 110px;
     color: #333d40;
     margin-bottom: 40px;
+}
+
+.plus-heart {
+    position: absolute;
+    right: 16px;
+    cursor: pointer;
 }
 
 .card-small {
@@ -411,7 +439,10 @@ input[type=text] {
     left: 5%;
     right: 5%;
     bottom: 10%;
+    max-width: 400px;
+    margin: 0 auto;
     z-index: 2000 !important;
+    cursor:default;
 }
 
 .zoom-in:hover {
