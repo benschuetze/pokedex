@@ -270,7 +270,10 @@ function filterPokemon() {
         if (title.toLowerCase().includes(search)) {
             pokemonContainer.innerHTML += pokemonHTML(i, poketitle, type, image, ability);
             backgroundColor(i, type);
+            document.getElementById(`heart-${i}`).classList.add('d-none');
+            document.getElementById(`heart-minus-${i}`).classList.add('d-none');
         }
+
     }
 }
 
