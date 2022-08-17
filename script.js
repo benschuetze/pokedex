@@ -21,6 +21,7 @@ async function loadAllPokemon() {
     allPokemon = await response.json();
     renderAllPokemonHTML(allPokemon);
     pushToArray(allPokemon);
+
 }
 
 async function pushToArray(allPokemon) {
@@ -59,10 +60,11 @@ async function renderAllPokemonHTML(allPokemon) {
 /*functions*/
 
 window.onscroll = function () {
+
     let scrollY = window.scrollY;
-    if ((window.innerHeight + scrollY) >= document.body.scrollHeight) {
-        arrIndex = arrIndex + 20;
-        length = length + 19;
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        arrIndex += + 20;
+        length += 19;
         renderAllPokemonHTML(allPokemon);
         scrollY = window.scrollY - window.innerHeight;
     }
@@ -161,15 +163,17 @@ function addToFavorites(i) {
     let title = capitalize(arrOfAllPokemon[i]['name']);
     alert.innerHTML = '';
     setTimeout(hideAlert, 4000);
-    console.log(arrOfAllPokemon[i]);
+    setFavStatusAndShowAlert(i, title, alert);
+
+}
+
+function setFavStatusAndShowAlert(i, title, alert) {
     if (arrOfAllPokemon[i]['favorite'] == false) {
         arrOfAllPokemon[i]['favorite'] = true;
-        console.log(arrOfAllPokemon[i]);
         alert.innerHTML = `${title} was added to your favorites!`;
     } else {
         alert.innerHTML = `${title} is already in your favorites!`;
     }
-
 }
 
 function removeFromFavorites(i) {
@@ -218,6 +222,14 @@ function renderFavorites() {
             document.getElementById(`heart-${i}`).classList.add('d-none');
             document.getElementById(`heart-minus-${i}`).classList.add('d-none');
         }
+    }
+
+    showInfo(all);
+}
+
+function showInfo(all) {
+    if(!all.innerHTML) {
+        all.innerHTML = '<p class="favorite-info">You have not yet added your favorite pokemon here. Click on the heart on the top right of the pokemon card to add the pokemon to this list!</p>'
     }
 }
 
