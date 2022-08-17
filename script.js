@@ -28,6 +28,7 @@ async function pushToArray(allPokemon) {
         let singlePokemonUrl = allPokemon['results'][i]['url'];
         let response = await fetch(singlePokemonUrl);
         pokemon = await response.json();
+        pokemon.favorite = false;
         arrOfAllPokemon.push(pokemon);
     }
 }
@@ -49,6 +50,8 @@ async function renderAllPokemonHTML(allPokemon) {
             let ability = capitalize(arrOfAllPokemon[i]['abilities'][0]['ability']['name']);
             all.innerHTML += pokemonHTML(i, title, type, image, ability);
             backgroundColor(i, type);
+            document.getElementById(`heart-${i}`).classList.add('d-none');
+            document.getElementById(`heart-minus-${i}`).classList.add('d-none');
         }
     }
 }
@@ -66,6 +69,10 @@ window.onscroll = function () {
 };
 
 function showPokemon(i) {
+    if (arrOfAllPokemon[i]['favorite'] == true) {
+        document.getElementById(`heart-minus-${i}`).classList.remove('d-none');
+        document.getElementById(`heart-${i}`).classList.add('d-none');
+    }
     zoomMode(i);
     configureZoomCard(i);
     animateStats(i);
@@ -81,7 +88,15 @@ function zoomMode(i) {
     document.getElementById('body').classList.add('stop-scrolling');
     document.getElementById(`pokemon-type-${i}`).classList.add('d-none');
     document.getElementById(`ability-${i}`).classList.add('d-none');
-    document.getElementById(`heart-${i}`).classList.remove('d-none');
+    checkFavStatusAndChangeHeart(i);
+}
+
+function checkFavStatusAndChangeHeart(i) {
+    if(arrOfAllPokemon[i]['favorite'] == false) {
+        document.getElementById(`heart-${i}`).classList.remove('d-none');
+        } else {
+            document.getElementById(`heart-minus-${i}`).classList.remove('d-none');
+        }
 }
 
 function configureZoomCard(i) {
@@ -115,6 +130,7 @@ function exitZoomMode(i) {
     document.getElementById(`pokemon-type-${i}`).classList.remove('d-none');
     document.getElementById(`ability-${i}`).classList.remove('d-none');
     document.getElementById(`heart-${i}`).classList.add('d-none');
+    document.getElementById(`heart-minus-${i}`).classList.add('d-none');
 }
 
 function removeZoomCard(i) {
@@ -140,19 +156,39 @@ function resetStats(i) {
 function addToFavorites(i) {
     let alert = document.getElementById('alert');
     alert.classList.remove('opacity-0');
+    document.getElementById(`heart-${i}`).style.display = 'none';
+    document.getElementById(`heart-minus-${i}`).classList.remove('d-none');
     let title = capitalize(arrOfAllPokemon[i]['name']);
     alert.innerHTML = '';
-    alert.innerHTML = `${title} was added to your favorites!`;
     setTimeout(hideAlert, 4000);
-    if (!arrOfFavoritePokemon.includes(arrOfAllPokemon[i])) {
-        arrOfFavoritePokemon.push(arrOfAllPokemon[i]);
+    console.log(arrOfAllPokemon[i]);
+    if (arrOfAllPokemon[i]['favorite'] == false) {
+        arrOfAllPokemon[i]['favorite'] = true;
+        console.log(arrOfAllPokemon[i]);
+        alert.innerHTML = `${title} was added to your favorites!`;
+    } else {
+        alert.innerHTML = `${title} is already in your favorites!`;
     }
+
+}
+
+function removeFromFavorites(i) {
+    let alert = document.getElementById('alert');
+    let title = capitalize(arrOfAllPokemon[i]['name']);
+    document.getElementById(`heart-${i}`).style.display = 'block';
+    document.getElementById(`heart-minus-${i}`).classList.add('d-none');
+    alert.classList.remove('opacity-0');
+    alert.innerHTML = '';
+    alert.innerHTML = `${title} removed from your favorites!`;
+    setTimeout(hideAlert, 4000);
+    arrOfAllPokemon[i]['favorite'] = false;
+
 }
 
 function hideAlert() {
     console.log('timeout');
     document.getElementById('alert').classList.add('opacity-0');
-  }
+}
 
 function showFavorites() {
     document.getElementById('top-button').classList.add('opacity-0');
@@ -161,17 +197,30 @@ function showFavorites() {
     document.getElementById('top-input').classList.add('z-index-negative');
     document.getElementById('top-heart').classList.add('d-none');
     document.getElementById('top-heart-full').classList.remove('d-none');
+
+    renderFavorites();
+
+
+}
+
+function renderFavorites() {
+    
     let all = document.getElementById('all-pokemon');
     all.innerHTML = '';
-    for (i = 0; i < arrOfFavoritePokemon.length; i++) {
-        let title = capitalize(arrOfFavoritePokemon[i]['name']);
-        let type = capitalize(arrOfFavoritePokemon[i]['types'][0]['type']['name']);
-        let image = arrOfFavoritePokemon[i]['sprites']['other']['dream_world']['front_default'];
-        let ability = capitalize(arrOfFavoritePokemon[i]['abilities'][0]['ability']['name']);
-        all.innerHTML += pokemonHTML(i, title, type, image, ability);
-        backgroundColor(i, type);
+    for (i = 0; i < arrOfAllPokemon.length; i++) {
+        if (arrOfAllPokemon[i]['favorite'] == true) {
+            let title = capitalize(arrOfAllPokemon[i]['name']);
+            let type = capitalize(arrOfAllPokemon[i]['types'][0]['type']['name']);
+            let image = arrOfAllPokemon[i]['sprites']['other']['dream_world']['front_default'];
+            let ability = capitalize(arrOfAllPokemon[i]['abilities'][0]['ability']['name']);
+            all.innerHTML += pokemonHTML(i, title, type, image, ability);
+            backgroundColor(i, type);
+            document.getElementById(`heart-${i}`).classList.add('d-none');
+            document.getElementById(`heart-minus-${i}`).classList.add('d-none');
+        }
     }
 }
+
 
 function showAllPokemon() {
     document.getElementById('top-button').classList.remove('opacity-0');
@@ -180,22 +229,34 @@ function showAllPokemon() {
     document.getElementById('top-input').classList.remove('z-index-negative');
     document.getElementById('top-heart').classList.remove('d-none');
     document.getElementById('top-heart-full').classList.add('d-none');
+
+    renderArray(arrOfAllPokemon);
+}
+
+
+function renderArray(array) {
+
     let all = document.getElementById('all-pokemon');
     all.innerHTML = '';
-    for (i = 0; i < arrOfAllPokemon.length; i++) {
-        let title = capitalize(arrOfAllPokemon[i]['name']);
-        let type = capitalize(arrOfAllPokemon[i]['types'][0]['type']['name']);
-        let image = arrOfAllPokemon[i]['sprites']['other']['dream_world']['front_default'];
-        let ability = capitalize(arrOfAllPokemon[i]['abilities'][0]['ability']['name']);
+    for (i = 0; i < array.length; i++) {
+        let title = capitalize(array[i]['name']);
+        let type = capitalize(array[i]['types'][0]['type']['name']);
+        let image = array[i]['sprites']['other']['dream_world']['front_default'];
+        let ability = capitalize(array[i]['abilities'][0]['ability']['name']);
         all.innerHTML += pokemonHTML(i, title, type, image, ability);
         backgroundColor(i, type);
+        document.getElementById(`heart-${i}`).classList.add('d-none');
+        document.getElementById(`heart-minus-${i}`).classList.add('d-none');
     }
+
+
+
 }
 
 /*search function*/
 
 function filterPokemon() {
-    let search = document.getElementById('search').value;
+    let search = document.getElementById('top-input').value;
     let pokemonContainer = document.getElementById('all-pokemon');
     search = search.toLowerCase();
     pokemonContainer.innerHTML = '';
@@ -224,7 +285,8 @@ function pokemonHTML(i, title, type, image, ability) {
         <div loading="lazy" id="${i}" class="card-small" onclick="showPokemon(${i})">
             <span id="back-${i}" class="d-none">Back To All</span>
             <span class="pokemon-name">${title}</span>
-            <img title="add to favorites" onclick="addToFavorites(${i})" id="heart-${i}" class="icon plus-heart d-none" src="heart-plus.svg" alt="">
+            <img title="add to favorites" onclick="addToFavorites(${i})" id="heart-${i}" class="icon plus-heart" src="heart-plus.svg" alt="">
+            <img src="heart-minus.svg" onclick="removeFromFavorites(${i})" class="icon plus-heart" id="heart-minus-${i}" alt="">
             <div class="img-container">
                 <img src="${image}" class="pokemon-image" id="img-${i}">
             </div>

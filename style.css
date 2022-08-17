@@ -255,6 +255,7 @@ input[type=text] {
 /*ids*/
 
 #alert {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -262,9 +263,8 @@ input[type=text] {
     background-color: white;
     height: 61px;
     width: 300px;
-    position: fixed;
-    top: 10%;
-    left: 65%;
+    right: 16px;
+    top: 16px;
     margin: 0 auto;
     z-index: 3000;
     border-radius: 8px;
